@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 class="title">search book in naver</h1>
+	<br>
+	<br>
+	<div class="editor-container">
+		<form class="d-flex" action="{% url 'api_book_search' %}" method="GET">
+		{% csrf_token %}
+		<input name="q" class="form-control me-2" type="search" placeholder="search in naver" aria-label="Search">
+		<button class="btn btn-outline-success" type="submit">search</button>
+		</form>
+	</div>
+	<div class="body">
+		{% for item in items %}
+		<div class="content">
+			<div class="sub">
+				<h2>{{item.title|safe}}</h2><br>
+				<a id="more" href="{{item.link}}"><img src="{{item.image" alt="" width="110" height="150"></a>
+				
+				<br>
+				{{item.autor}}<br><br>
+				{{item.price}}
+				<br><br>
+				
+				<details>
+				<summary>Details</summary>
+					{{item.description|safe}}
+				</details><br>
+				<p class="light">{{item.publisher}}</p>
+			</div>
+		</div>
+		{%endfor %}
+	</div>
+	<br>
+	{% endblock %}
+</body>
+</html>
